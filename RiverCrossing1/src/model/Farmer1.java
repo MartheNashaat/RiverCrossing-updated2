@@ -1,4 +1,4 @@
-package river;
+package model;
 
 import java.awt.Graphics;
 import java.awt.event.MouseListener;

@@ -1,4 +1,4 @@
-package river;
+package view;
 
 import java.awt.BorderLayout;
 
@@ -14,9 +14,14 @@ import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
+import model.Animal;
+import model.Boat;
+import model.Farmer1;
 
 public class SecondLevel extends JPanel implements ActionListener, MouseListener {
 
@@ -32,13 +37,13 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 	int yboat= 800;
 	int xanimal= 850;
 	int yanimal =700;
-	
-	//weights
-	int farmer1weight= 60;
+	int moves=0;
+	int farmer1weight =60;
 	int farmer2weight=40;
-	int farmer3weight=90;
-	int farmer4weight = 80;
+	int farmer3weight = 90;
+	int farmer4weight= 80;
 	int animalweight=20;
+	
 	
 	
 	
@@ -47,7 +52,7 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 	Farmer1 farmer2= new Farmer1(xfarmer2,yfarmer2,"F:\\Images\\farmm.png",0);
 	Farmer1 farmer3= new Farmer1(xfarmer3,yfarmer3,"F:\\Images\\humanw.png",0);
 	Farmer1 farmer4= new Farmer1(xfarmer4,yfarmer4,"F:\\Images\\farmer455.png",0);
-	Boat boat = new Boat(xboat,yboat,"F:\\Images\\boatt.png",0);
+	Boat boat = Boat.getInstance(xboat,yboat,"F:\\Images\\boatt.png",0);
 	Animal animal=new Animal(xanimal,yanimal,"F:\\Images\\mikepp.png",0);
 	JButton move = new JButton();
 	JButton moveback = new JButton();
@@ -55,18 +60,24 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 	boolean moveright = false;
 	boolean onleft = false;
 	Timer tt= new Timer(100,this);
+	JLabel numberofmoves= new JLabel();
+	
 	
 	JButton instructionsButton = new JButton();
 	JButton solutionButton = new JButton();
 	
 
 	SecondLevel(){
-	//	tt.start();
+		tt.start();
+	//	tt.stop();
+		this.setLayout(null);
 		window.add(this);
 		window.setSize(1320,950);
 		window.setLocation(40,20);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setVisible(true);
+		
+		
 		
 //instructions button
 		instructionsButton.setText("Instructions ");
@@ -114,6 +125,11 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				moveright = true;
+				moves++;
+				//repaint();
+				numberofmoves.setText("Moves : " + moves);
+				
+				
 				// TODO Auto-generated method stub
 
 			}
@@ -124,6 +140,11 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				moveleft = true;
+				
+				moves++;
+				numberofmoves.setText("Moves : " + moves);
+				
+				//repaint();
 
 				// TODO Auto-generated method stub
 
@@ -131,21 +152,29 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 		});
 
 		
+		//numberofmoves.setText("Moves : " + moves);
+		
+		
+		numberofmoves.setBounds(1135, 400, 100,30);
+		//this.add(numberofmoves);
+		window.add(numberofmoves);
 		
 		
 	}	
 	public void paint (Graphics g) {
+	//	super.paint(g);
 		ImageIcon background = new ImageIcon("F:\\Images\\story2.jpg");
 		g.drawImage(background.getImage(), 0, 0,null);
-		
 		boat.drawBoat(g);
 		farmer1.drawFarmer(g);
 		farmer2.drawFarmer(g);
 		farmer3.drawFarmer(g);
 		farmer4.drawFarmer(g);
 		animal.drawAnimal(g);
-		
+	//	repaint();
+//		
 	}
+
 
 	@Override
 	public void actionPerformed(ActionEvent is) {
@@ -161,6 +190,11 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 		 
 		 else if (is.getSource() == tt) {
 				if (moveleft == true) {
+					if (!isstoryvalid())
+					{
+						moveleft= false;
+						return;
+					}
 					
 					
 					if (xboat > 130) {
@@ -169,8 +203,7 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 
 							xfarmer1 -= 60;
 							farmer1.setxAxis(xfarmer1);
-							
-
+			
 						}
 						if (farmer2.getPosition() == 1) {
 
@@ -252,13 +285,21 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 					
 			   	}
 				if (moveright == true) {
+					if (!isstoryvalid())
+					{
+						moveright= false;
+						return;
+					}
+					
+					
 					if (xboat < 710) {
 
 						if (farmer1.getPosition() == 1) {
 
 							xfarmer1 += 60;
 							farmer1.setxAxis(xfarmer1);
-
+							
+							
 						}
 						if (farmer2.getPosition() == 1) {
 
@@ -324,7 +365,7 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 							repaint();
 						}
 					
-						
+					
 						if (farmer4.getPosition() == 1) {
 							farmer4.setPosition(0);
 							xfarmer4 += 170;
@@ -357,15 +398,16 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 		if (x >= xfarmer1 && x <= xfarmer1 + farmer1.getFarmerIcon().getIconWidth()) {
 			if (y >= yfarmer1 && y <= yfarmer1 + farmer1.getFarmerIcon().getIconHeight())
 		{
-				
+				if (farmer1.getPosition()!=1) {
 				xfarmer1 += 230;
 				yfarmer1 += 140;
 				farmer1.setPosition(1);
 				farmer1.setyAxis(yfarmer1);
 				farmer1.setxAxis(xfarmer1);
 				repaint();
+				
 			}
-			
+		}
 
 		}
 
@@ -374,7 +416,7 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 			{
 					
 					
-
+					if (farmer2.getPosition()!=1) {
 					xfarmer2 += 102;
 					yfarmer2 += 150;
 					farmer2.setPosition(1);
@@ -383,12 +425,13 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 					repaint();
 				}
 			}
+		}
 		else if (x >= xfarmer3 && x <= xfarmer3 + farmer3.getFarmerIcon().getIconWidth()) {
 				if (y >= yfarmer3 && y <= yfarmer3 + farmer3.getFarmerIcon().getIconHeight())
 			{
 					
 					
-
+					if (farmer3.getPosition()!=1) {
 					xfarmer3 += 90;
 					yfarmer3 += 110;
 					farmer3.setPosition(1);
@@ -396,7 +439,7 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 					farmer3.setxAxis(xfarmer3);
 					repaint();
 				}
-				
+			}	
 
 			}
 		
@@ -405,7 +448,7 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 			{
 					
 					
-
+					if (farmer4.getPosition()!=1) {
 					xfarmer4 -= 120;
 					yfarmer4 += 140;
 					farmer4.setPosition(1);
@@ -413,7 +456,7 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 					farmer4.setxAxis(xfarmer4);
 					repaint();
 				}
-				
+			}
 
 			}
 		else if (x >= xanimal && x <= xanimal + animal.getAnimalIcon().getIconWidth()) {
@@ -421,7 +464,7 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 		{
 				
 				
-
+				if (animal.getPosition()!=1) {
 				xanimal -= 40;
 				yanimal += 50;
 				animal.setPosition(1);
@@ -429,29 +472,39 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 				animal.setxAxis(xanimal);
 				repaint();
 			}
-			
+		}
 
 		}
-		
+		//if (onleft==true )
+	//if (onleft==false)
+			//moves++;
+	System.out.println(moves);	
 	//	if (farmer1.getPosition()==1 || farmer2.getPosition()==1 || farmer3.getPosition()==1 || farmer4.getPosition()==1)
 		//	tt.restart();
 	//	else
 		
 		
-		
+	/*	
 		if (animal.getPosition()==1 && farmer1.getPosition()==0 && farmer2.getPosition()==0 &&  farmer3.getPosition()==0 &&  farmer4.getPosition()==0)
 		{
 			tt.stop();
+			
+			
+			
 			//JOptionPane.showMessageDialog(window, "Only Farmers can row the boat");
 		}
-		else if (farmer1.getPosition()==1 && farmer2.getPosition()==1)//60+40
+		else if (farmer1.getPosition() ==0&&  farmer2.getPosition()==0 && farmer3.getPosition()==0 && farmer4.getPosition()==0 &&animal.getPosition()==0)
+			tt.stop();
+		else if (farmer1.getPosition() ==2&&  farmer2.getPosition()==2 && farmer3.getPosition()==2 && farmer4.getPosition()==2 &&animal.getPosition()==2)
+			tt.stop();
+		else if (farmer1.getPosition()==1 && farmer2.getPosition()==1 && farmer3.getPosition()==0 && farmer4.getPosition()==0 && animal.getPosition()==0)//60+40
 			tt.restart();
-		else if (farmer4.getPosition()==1 && animal.getPosition()==1)//80+20
+		else if (farmer4.getPosition()==1 && animal.getPosition()==1 && farmer1.getPosition()==0 && farmer2.getPosition()==0 && farmer3.getPosition()==0)//80+20
 			tt.restart();
-		else if (farmer1.getPosition()==1 && animal.getPosition()==1)//60+20
+		else if (farmer1.getPosition()==1 && animal.getPosition()==1 && farmer2.getPosition()==0 && farmer3.getPosition()==0 && farmer4.getPosition()==0)//60+20
 			tt.restart();
 			
-		else if (farmer1.getPosition()==1 && farmer3.getPosition()==1)//60+90
+		else if (farmer1.getPosition()==1 && farmer3.getPosition()==1 )//60+90
 		{
 			tt.stop();
 			JOptionPane.showMessageDialog(window, "Boat Cannot bear more than 100 kg!");
@@ -471,7 +524,7 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 			tt.stop();
 			JOptionPane.showMessageDialog(window, "Boat Cannot bear more than 100 kg!");
 		}
-		else if (farmer2.getPosition()==1 && animal.getPosition()==1)//40+20
+		else if (farmer2.getPosition()==1 && animal.getPosition()==1 && farmer1.getPosition()==0 && farmer3.getPosition()==0 && farmer4.getPosition()==0)//40+20
 		{
 			tt.start();
 		}
@@ -486,6 +539,9 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 			JOptionPane.showMessageDialog(window, "Boat Cannot bear more than 100 kg!");
 		}
 		
+		else if (farmer3.getPosition()==1)
+			tt.restart();
+		
 		
 		if (farmer1.getPosition()==2 && farmer2.getPosition()==2 && farmer3.getPosition()==2 && farmer4.getPosition() ==2 && animal.getPosition() ==2)
 		{
@@ -497,9 +553,33 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 	
 		
 		}
-		
+		*/
 		
 		}
+	
+	public boolean isstoryvalid() {
+		
+		int sum=0;
+	
+		if (farmer1.getPosition()==1)
+			sum+= farmer1weight;
+		 if (farmer2.getPosition()==1)
+			sum+= farmer2weight;
+		 if (farmer3.getPosition()==1)
+			sum+= farmer3weight;
+		 if (farmer4.getPosition()==1)
+			 sum+= farmer4weight;
+		 if (animal.getPosition()==1)
+			 sum+= animalweight;
+		 if(sum>100)
+		 { JOptionPane.showMessageDialog(window, "Boat weight cannot exceed 100 kg");
+			
+			 return false;
+		}
+		 
+				return true;
+		
+	}
 	
 	
 	public void handlepressonleft(int x, int y) {
@@ -507,6 +587,7 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 		if (x >= xfarmer1 && x <= xfarmer1 + farmer1.getFarmerIcon().getIconWidth()) {
 			if (y >= yfarmer1 && y <= yfarmer1 + farmer1.getFarmerIcon().getIconHeight()) {
 
+				if (farmer1.getPosition()!=1) {
 			//	xfarmer1 += 100;
 				yfarmer1 += 120;
 				farmer1.setPosition(1);
@@ -514,12 +595,13 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 				farmer1.setxAxis(xfarmer1);
 				repaint();
 			}
-			
+			}
 		}
 
 		else if (x >= xfarmer2 && x <= xfarmer2 + farmer2.getFarmerIcon().getIconWidth()) {
 			if (y >= yfarmer2 && y <= yfarmer2 + farmer2.getFarmerIcon().getIconHeight()) {
 
+				if (farmer2.getPosition()!=1) {
 				xfarmer2 += 100;
 				 yfarmer2 += 90;
 				farmer2.setPosition(1);
@@ -528,22 +610,25 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 				repaint();
 			}
 
+		  }
 		}
 		else if (x >= xfarmer3 && x <= xfarmer3 + farmer3.getFarmerIcon().getIconWidth()) {
 			if (y >= yfarmer3 && y <= yfarmer3 + farmer3.getFarmerIcon().getIconHeight()) {
-
+			
+				if (farmer3.getPosition()!=1) {
 				xfarmer3 += 100;
 				 yfarmer3 += 85;
 				farmer3.setPosition(1);
 				farmer3.setyAxis(yfarmer3);
 				farmer3.setxAxis(xfarmer3);
 				repaint();
+			 }
 			}
-
 		}
 		else if (x >= xfarmer4 && x <= xfarmer4 + farmer4.getFarmerIcon().getIconWidth()) {
 			if (y >= yfarmer4 && y <= yfarmer4 + farmer4.getFarmerIcon().getIconHeight()) {
 
+				if (farmer4.getPosition()!=1) {
 				xfarmer4 += 150;
 				yfarmer4 += 50;
 				farmer4.setPosition(1);
@@ -551,11 +636,12 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 				farmer4.setxAxis(xfarmer4);
 				repaint();
 			}
-
+			}		
 		}
 		else if (x >= xanimal && x <= xanimal + animal.getAnimalIcon().getIconWidth()) {
 			if (y >= yanimal && y <= yanimal + animal.getAnimalIcon().getIconHeight()) {
 
+				if (animal.getPosition()!=1) {
 				xanimal += 100;
 				yanimal += 50;
 				animal.setPosition(1);
@@ -564,8 +650,8 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 				repaint();
 			}
 
+		 }
 		}
-		
 
 		
 		

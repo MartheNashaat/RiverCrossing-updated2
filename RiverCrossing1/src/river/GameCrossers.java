@@ -28,5 +28,10 @@ public Location getLocation() {
 public void setLocation(Location l) {
 	this.location = l;
 }
+
+
+
+	
+	  
 	
 }

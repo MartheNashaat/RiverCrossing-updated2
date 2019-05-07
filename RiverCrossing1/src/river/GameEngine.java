@@ -1,5 +1,10 @@
 package river;
 
+import model.cabbage;
+import model.farmer;
+import model.goat;
+import model.wolf;
+
 public class GameEngine {
 
 	public enum Item {

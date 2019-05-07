@@ -1,4 +1,4 @@
-package river;
+package view;
 
 import java.awt.BorderLayout;
 
@@ -127,7 +127,7 @@ public class LevelWindow extends JPanel implements ActionListener,MouseListener 
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getSource()==backButton) {
-			levels.dispose();
+			//levels.dispose();
 			MenuR m=new MenuR();
 		}
 		else if(ae.getSource()==enterButton&&nameOfLevels.getSelectedIndex()==0) {
@@ -139,7 +139,7 @@ public class LevelWindow extends JPanel implements ActionListener,MouseListener 
 			}
 			
 		}
-		else if(ae.getSource()==enterButton&&nameOfLevels.getSelectedIndex()==1) {
+		else if(ae.getSource()==enterButton && nameOfLevels.getSelectedIndex()==1) {
 			SecondLevel sl=new SecondLevel();
 		}
 		

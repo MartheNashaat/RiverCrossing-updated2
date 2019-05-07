@@ -1,4 +1,4 @@
-package river;
+package view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;

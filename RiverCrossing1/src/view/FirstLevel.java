@@ -1,4 +1,4 @@
-package river;
+package view;
 
 import java.awt.BorderLayout;
 
@@ -20,6 +20,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import model.Animal;
+import model.Boat;
+import model.Farmer1;
+import model.Plant;
+import river.Factory;
+import river.GameEngine;
+import river.Moveleft;
+import river.Moveright;
 import river.GameEngine.Item;
 import river.GameEngine.Location;
 
@@ -38,29 +46,37 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 	boolean moveright = false;
 	boolean onleft = false;
 	static JFrame window = new JFrame("First Story");
-	int xfarmer = 460;
-	int yfarmer = 260;
-	int xboat = 400;
-	int yboat = 350;
-	int xgoat = 480;
-	int ygoat = 299;
-	int xwolf =510;
-	int ywolf =300;
-	int xplant = 570;
-	int yplant = 320;
+	int xfarmer = 717;
+	int yfarmer = 190;
+	int xboat = 700;
+	int yboat = 420;
+	int xgoat = 780;
+	int ygoat = 270;
+	int xwolf =840;
+	int ywolf =270;
+	int xplant = 980;
+	int yplant = 390;
+	int moves=0;
 	
 	
 
-	Timer t = new Timer(170, this);
-	Farmer1 farmer = new Farmer1(xfarmer, yfarmer, "F:\\Images\\farmerr.png", 0);
+	Timer t = new Timer(100, this);
+	Farmer1 farmer = new Farmer1(xfarmer, yfarmer, "F:\\Images\\farm2.png", 0);
+	Factory f = new Factory();
+	
+	Animal wolf = new Animal(xwolf, ywolf, "F:\\Images\\wolfff.png", 0);
+	Animal goat = new Animal(xgoat, ygoat, "F:\\Images\\gggg.png", 0);
+	Boat boat =  Boat.getInstance(xboat, yboat, "F:\\Images\\boat2.png", 0); //
+	
+	Plant plant = (Plant)f.getShape("Plant");
+	
+	Moveleft m = new Moveleft(boat);
+	Moveright r= new Moveright(boat);
+	JLabel numberofmoves = new JLabel();
+	
+	
+	
 
-//	Farmer1 farmer= new Farmer1(380,220,"F:\\codeblocks trials\\zarafa.png");
-
-	Animal wolf = new Animal(xwolf, ywolf, "F:\\Images\\wol.png", 0);
-	Animal goat = new Animal(xgoat, ygoat, "F:\\Images\\gg.png", 0);
-	Boat boat = new Boat(xboat, yboat, "F:\\Images\\bb.png", 0); //
-	Plant plant = new Plant(xplant, yplant, "F:\\Images\\plantt.png", 0);
-//	Plant plant=new Plant(230,350,"images//grass.png");
 	JButton instructionsButton = new JButton();
 	JButton solutionButton = new JButton();
 	JLabel fa = new JLabel();
@@ -68,9 +84,13 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 	JButton moveback = new JButton();
 
 	FirstLevel() throws IOException {
+		plant.setxAxis(xplant);
+		plant.setyAxis(yplant);
+		plant.setImagePath("F:\\Images\\plantt.png");
+		plant.setPosition(0);
 		t.start();
 		window.add(this);
-		window.setSize(1300, 620);
+		window.setSize(1500, 620);
 		window.setLocation(40, 20);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setVisible(true);
@@ -78,24 +98,22 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 //instructions button		
 		instructionsButton.setText("Instructions ");
 		instructionsButton.setBackground(Color.WHITE);
-		// instructionsButton.setIcon (new ImageIcon("images//instr..jpg"));
+		
 		instructionsButton.addActionListener(this);
-		// instructionsButton.addKeyListener(this);
 		instructionsButton.addMouseListener(this);
 		instructionsButton.setSize(0, 0);
 		window.add(instructionsButton, BorderLayout.WEST);
 		window.setLayout(null);
-		instructionsButton.setBounds(700, 130, 100, 30);
+		instructionsButton.setBounds(1350, 130, 100, 30);
 		
 //solutions button
 		solutionButton.setText("Solution ");
 		solutionButton.setBackground(Color.WHITE);
-		// instructionsButton.setIcon (new ImageIcon("images//instr..jpg"));
 		solutionButton.addActionListener(this);
 		solutionButton.addMouseListener(this);
 		solutionButton.setSize(0, 0);
 		window.add(solutionButton, BorderLayout.WEST);
-		solutionButton.setBounds(700, 80, 100, 30);
+		solutionButton.setBounds(1350, 80, 100, 30);
 
 	//move boat to the left bank	
 		move.setText("Move");
@@ -104,7 +122,7 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 		move.addMouseListener(this);
 		move.setSize(0, 0);
 		window.add(move);
-		move.setBounds(700, 180, 100, 30);
+		move.setBounds(1350, 180, 100, 30);
 		
 	//move boat back to the right bank	
 		moveback.setText("Moveback");
@@ -113,14 +131,15 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 		moveback.addMouseListener(this);
 		moveback.setSize(0, 0);
 		window.add(moveback);
-		moveback.setBounds(700, 230, 100, 30);
+		moveback.setBounds(1350, 230, 100, 30);
 		moveback.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				moveright = true;
-				// TODO Auto-generated method stub
-
+				moves++;
+				numberofmoves.setText("Moves : " + moves);
+			
 			}
 		});
 
@@ -129,22 +148,28 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				moveleft = true;
-
-				
+				moves++;
+				numberofmoves.setText("Moves : " + moves);
+			
 			}
 		});
 
+		numberofmoves.setBounds(1350, 400, 100,30);
+		//this.add(numberofmoves);
+		window.add(numberofmoves);
+		
+		
+		
 	}
 
 	public void paint(Graphics g) {
-		ImageIcon background = new ImageIcon("F:\\Images\\Background.jpg");
+		ImageIcon background = new ImageIcon("F:\\Images\\story1.jpeg");
 		g.drawImage(background.getImage(), 0, 0, null);
 		
 		
 		boat.drawBoat(g);
 		goat.drawAnimal(g);
 		wolf.drawAnimal(g);
-		
 		plant.drawPlant(g);
 		farmer.drawFarmer(g);
 
@@ -173,9 +198,15 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 							+ "7-Farmer with the goat(cross)" + "\n\n" + "Done.");
 		} else if (ib.getSource() == t) {
 			if (moveleft == true) {
+				if (!isvalid())
+				{
+					moveleft=false;
+					return;
+					
+				}
 				
 				
-				if (xboat > 200) {
+				if (xboat > 500) {
 
 					if (farmer.getPosition() == 1) {
 
@@ -193,45 +224,45 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 					if (wolf.getPosition() == 1) {
 
 						xwolf -= 60;  
-						//ywolf = +30;
-					//	wolf.setyAxis(ywolf);
 						wolf.setxAxis(xwolf);
 
 					}
 					if (plant.getPosition() == 1) {
 
 						xplant  -= 60;  
-						//ywolf = +30;
-					//	wolf.setyAxis(ywolf);
 						plant.setxAxis(xplant);
 
 					}
 					
 					xboat -= 60;
-					boat.setxAxis(xboat);
-
+			        r.execute();
 					repaint();
 				} else {// boat is on the left bank
+					
 					moveleft = false;
 					onleft = true;
 					if (farmer.getPosition() == 1) {
 						farmer.setPosition(2);
-						xfarmer -= 90;
+						xfarmer -= 150;
+						yfarmer -= 90;
+						farmer.setyAxis(yfarmer);
 						farmer.setxAxis(xfarmer);
 						repaint();
 					}
 
 					if (goat.getPosition() == 1) {
 						goat.setPosition(2);
-						xgoat -= 30;
+						xgoat -= 300;
+						ygoat -=80;
+						goat.setyAxis(ygoat);
 						goat.setxAxis(xgoat);
 						repaint();
 					}
 					
 					if (wolf.getPosition() == 1) {
 						wolf.setPosition(2);
-						xwolf -= 100;
-					//	ywolf += 150;
+						xwolf -= 370;
+						ywolf -= 50;
 						wolf.setyAxis(ywolf);
 						wolf.setxAxis(xwolf);
 						repaint();
@@ -239,7 +270,7 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 					if (plant.getPosition() == 1) {
 						plant.setPosition(2);
 						xplant -= 200;
-						yplant += 30;
+						yplant -= 80;
 						plant.setyAxis(yplant);
 						plant.setxAxis(xplant);
 						repaint();
@@ -250,7 +281,13 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 				}
 			}
 			if (moveright == true) {
-				if (xboat < 400) {
+				if (!isvalid())
+				{moveright=false;
+					return;
+					
+				}
+				
+				if (xboat < 720) {
 
 					if (farmer.getPosition() == 1) {
 
@@ -268,8 +305,6 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 					if (wolf.getPosition() == 1) {
 
 						xwolf += 60;
-						//ywolf = +30;
-						//wolf.setyAxis(ywolf);
 						wolf.setxAxis(xwolf);
 
 					}
@@ -278,8 +313,6 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 					if (plant.getPosition() == 1) {
 
 						xplant += 60;
-						//ywolf = +30;
-						//wolf.setyAxis(ywolf);
 						plant.setxAxis(xplant);
 
 					}
@@ -287,49 +320,55 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 
 
 					xboat += 60;
-					boat.setxAxis(xboat);
-
+					m.execute();
 					repaint();
 				} else {
+					
 					moveright = false;
 					onleft = false;
+					
 					if (farmer.getPosition() == 1) {
+						
 						farmer.setPosition(0);
-						xfarmer += 60;
-						yfarmer-=30;
+						xfarmer -= 45;
+						yfarmer-=120;
 						farmer.setyAxis(yfarmer);
 						farmer.setxAxis(xfarmer);
 						repaint();
+						
 					}
 
 					if (goat.getPosition() == 1) {
+						
 						goat.setPosition(0);
-						xgoat += 60;
-						ygoat-=30;
+						xgoat -= 10;
+						ygoat-=110;
 						goat.setyAxis(ygoat);
 						goat.setxAxis(xgoat);
 						repaint();
 					}
 					
 					if (wolf.getPosition() == 1) {
+						
 						wolf.setPosition(0);
-						xwolf += 60;
-						ywolf-=30;
+						xwolf += 90;
+						ywolf-=45;
 						wolf.setyAxis(ywolf);
 						wolf.setxAxis(xwolf);
 						repaint();
+						
 					}
 				
 					
 					if (plant.getPosition() == 1) {
+						
 						plant.setPosition(0);
-						xplant += 60;
+						xplant += 190;
 						yplant-=30;
 						plant.setyAxis(yplant);
 						plant.setxAxis(xplant);
 						repaint();
 					}
-				
 
 			}
 
@@ -337,40 +376,21 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 	  }
 	}
 
-/*	public boolean isvalid() {
+	public boolean isvalid() {
+		
 		if (farmer.getPosition() != 1)
 			return false;
 		if (goat.getPosition() == wolf.getPosition())
 			return false;
 		if (goat.getPosition() == plant.getPosition())
 			return false;
-
+		if (farmer.getPosition()==2 && goat.getPosition()==2 && wolf.getPosition()==2 && plant.getPosition()==2)
+			JOptionPane.showMessageDialog(window, "You Won");
+	
 		return true;
 
 	}
-*/
-	public void move(Item id) {
-		switch (id) {
-		case WOLF:
-			if (wolf.getPosition() == 0 && goat.getPosition() != 1	&& plant.getPosition() != 1) {
-				wolf.setPosition(1);
-				farmer.setPosition(1);
-				goat.setPosition(0);
-			}
-			break;
-	/*	case CABBAGE:
-			if (cabbage.getLocation() == CurrentLocation && wolf.getLocation() != Location.BOAT
-					&& goat.getLocation() != Location.BOAT) {
-				cabbage.setLocation(Location.BOAT);
-			}
-			break;*/
-		default:
-//add farmer
-		}
-	}
-	
-	
-	
+
 	
 	public void handlepressonright(int x, int y) {
 
@@ -379,119 +399,142 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 		{
 				
 				
-
-				xfarmer -= 60;
-				yfarmer += 30;
+				if (farmer.getPosition()!=1) {
+				xfarmer += 40;
+				yfarmer += 118;
 				farmer.setPosition(1);
 				farmer.setyAxis(yfarmer);
 				farmer.setxAxis(xfarmer);
 				repaint();
 			}
 			
-
+		}
 		}
 
 		else if (x >= goat.getxAxis() && x <= goat.getxAxis() + goat.getAnimalIcon().getIconWidth()) {
+			
 			if (y >= goat.getyAxis() && y <= goat.getyAxis() + goat.getAnimalIcon().getIconHeight()) {
-				xgoat -= 60;
-				ygoat += 30;
+				
+				if (goat.getPosition()!=1) {
+					
+				xgoat += 40;
+				ygoat += 100;
 				goat.setPosition(1);
 				goat.setyAxis(ygoat);
 				goat.setxAxis(xgoat);
-			//	goat.setPosition(1);
 				repaint();
-			}
-
+				
+			  } 
+			}		
 		}
 		
 		else if (x >= wolf.getxAxis() && x <= wolf.getxAxis() + wolf.getAnimalIcon().getIconWidth()) {
-			if (y >= wolf.getyAxis() && y <= wolf.getyAxis() + wolf.getAnimalIcon().getIconHeight()) 
-			{
-				xwolf -= 60;
-				//ywolf += 30;
+			 
+			if (y >= wolf.getyAxis() && y <= wolf.getyAxis() + wolf.getAnimalIcon().getIconHeight()) {
+				
+				if (wolf.getPosition()!=1) {
+				xwolf -= 55;
+				ywolf += 40;
 				wolf.setPosition(1);
-				//wolf.setyAxis(ywolf);
+				wolf.setyAxis(ywolf);
 				wolf.setxAxis(xwolf);
 				wolf.setPosition(1);
 				repaint();
-			}
+				
+				}
 
+			}	
 		}
 		
 		
 		else if (x >= plant.getxAxis() && x <= plant.getxAxis() + plant.getPlanticon().getIconWidth()) {
-			if (y >= plant.getyAxis() && y <= plant.getyAxis() + plant.getPlanticon().getIconHeight())
-				{
-				xplant -= 120;
-				yplant += 10;
+			
+			if (y >= plant.getyAxis() && y <= plant.getyAxis() + plant.getPlanticon().getIconHeight())	{
+				
+				if (plant.getPosition()!=1) {
+				xplant -= 140;
+				yplant +=40;
 				plant.setPosition(1);
-				//wolf.setyAxis(ywolf);
+				plant.setyAxis(yplant);
 				plant.setxAxis(xplant);
-				plant.setPosition(1);
+			
 				repaint();
 			}
-
+			}
 		}
-		}
+	}
 	
 	
 	public void handlepressonleft(int x, int y) {
 	
 		if (x >= xfarmer && x <= xfarmer + farmer.getFarmerIcon().getIconWidth()) {
+			
 			if (y >= yfarmer && y <= yfarmer + farmer.getFarmerIcon().getIconHeight()) {
-
-				xfarmer += 60;
-				// yfarmer += 20;
+				
+				if (farmer.getPosition()!=1) {
+				xfarmer += 110;
+				 yfarmer += 100;
 				farmer.setPosition(1);
 				farmer.setyAxis(yfarmer);
 				farmer.setxAxis(xfarmer);
 				repaint();
+				
+			   }
 			}
-
 		}
 
-		else	if (x >= xgoat && x <= xgoat + goat.getAnimalIcon().getIconWidth()) {
+		else if (x >= xgoat && x <= xgoat + goat.getAnimalIcon().getIconWidth()) {
+			
 			if (y >= ygoat && y <= ygoat + goat.getAnimalIcon().getIconHeight()) {
+				
 
-				xgoat += 60;
-				// yfarmer += 20;
+				if (goat.getPosition()!=1) {
+				xgoat +=200;
+				ygoat+=85;
 				goat.setPosition(1);
 				goat.setyAxis(ygoat);
 				goat.setxAxis(xgoat);
 				repaint();
-			}
-
+				
+				}
+			}	
 		}
 
-		else	if (x >= xwolf && x <= xwolf + wolf.getAnimalIcon().getIconWidth()) {
+		else if (x >= xwolf && x <= xwolf + wolf.getAnimalIcon().getIconWidth()) {
+			
 			if (y >= ywolf && y <= ywolf + wolf.getAnimalIcon().getIconHeight()) {
-
-				xwolf += 50;
-				//ywolf -=30;
 				
-				// yfarmer += 20;
+
+				if (wolf.getPosition()!=1) {
+				xwolf += 300;
+				ywolf +=50;
 				wolf.setPosition(1);
 				wolf.setyAxis(ywolf);
 				wolf.setxAxis(xwolf);
 				repaint();
+			
+				}
 			}
-
 		}
-		else	if (x >= xplant && x <= xplant + plant.getPlanticon().getIconWidth()) {
+		else if (x >= xplant && x <= xplant + plant.getPlanticon().getIconWidth()) {
+			
 			if (y >= yplant && y <= yplant + plant.getPlanticon().getIconHeight()) {
-
-				xplant += 50;
-				//ywolf -=30;
 				
-				// yfarmer += 20;
+
+				if (plant.getPosition()!=1) {
+				xplant += 80;
+				yplant+=80;
 				plant.setPosition(1);
 				plant.setyAxis(yplant);
 				plant.setxAxis(xplant);
 				repaint();
+			
+				}
 			}
-
 		}
+		
 	}
+		
 
 		
 	
@@ -504,7 +547,7 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
+	
 		System.out.println(e.getX());
 		System.out.println(e.getY());
 
@@ -522,32 +565,27 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+	
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 }
