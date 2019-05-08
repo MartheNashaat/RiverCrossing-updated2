@@ -62,12 +62,12 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 	
 
 	Timer t = new Timer(100, this);
-	Farmer1 farmer = new Farmer1(xfarmer, yfarmer, "C:/Users/lenovo/git/repository/RiverCrossing1/ImportedImages/Images/farm2.png", 0);
+	Farmer1 farmer = new Farmer1(xfarmer, yfarmer, "ImportedImages\\Images\\farm2.png", 0);
 	Factory f = new Factory();
 	
-	Animal wolf = new Animal(xwolf, ywolf, "C:/Users/lenovo/git/repository/RiverCrossing1/ImportedImages/Images/wolfff.png", 0);
-	Animal goat = new Animal(xgoat, ygoat, "C:/Users/lenovo/git/repository/RiverCrossing1/ImportedImages/Images/gggg.png", 0);
-	Boat boat =  Boat.getInstance(xboat, yboat, "C:/Users/lenovo/git/repository/RiverCrossing1/ImportedImages/Images/boat2.png", 0); //
+	Animal wolf = new Animal(xwolf, ywolf, "ImportedImages\\Images\\wolfff.png", 0);
+	Animal goat = new Animal(xgoat, ygoat, "ImportedImages\\Images\\gggg.png", 0);
+	Boat boat =  Boat.getInstance(xboat, yboat, "ImportedImages\\Images\\boat2.png", 0); //
 	
 	Plant plant = (Plant)f.getShape("Plant");
 	
@@ -87,7 +87,7 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 	FirstLevel() throws IOException {
 		plant.setxAxis(xplant);
 		plant.setyAxis(yplant);
-		plant.setImagePath("C:/Users/lenovo/git/repository/RiverCrossing1/ImportedImages/Images/plantt.png");
+		plant.setImagePath("ImportedImages\\Images\\plantt.png");
 		plant.setPosition(0);
 		t.start();
 		window.add(this);
@@ -164,7 +164,7 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 	}
 
 	public void paint(Graphics g) {
-		ImageIcon background = new ImageIcon("C:/Users/lenovo/git/repository/RiverCrossing1/ImportedImages/Images/story1.jpeg");
+		ImageIcon background = new ImageIcon("ImportedImages\\Images\\story1.jpeg");
 		g.drawImage(background.getImage(), 0, 0, null);
 		
 		
@@ -408,8 +408,7 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 				farmer.setxAxis(xfarmer);
 				repaint();
 			}
-			
-		}
+		  }
 		}
 
 		else if (x >= goat.getxAxis() && x <= goat.getxAxis() + goat.getAnimalIcon().getIconWidth()) {
@@ -460,8 +459,8 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 				plant.setxAxis(xplant);
 			
 				repaint();
-			}
-			}
+			  }
+		   }
 		}
 	}
 	
@@ -530,7 +529,7 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 				plant.setxAxis(xplant);
 				repaint();
 			
-				}
+		     	}
 			}
 		}
 		

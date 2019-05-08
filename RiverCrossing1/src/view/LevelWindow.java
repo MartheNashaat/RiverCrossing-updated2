@@ -65,7 +65,7 @@ public class LevelWindow extends JPanel implements ActionListener,MouseListener 
 		levels.getContentPane().add(backButton);
 		
 		enterButton.setBounds(0, 0, 732, 382);
-		enterButton.setIcon(new ImageIcon("F:\\Images\\Background.jpg"));
+		enterButton.setIcon(new ImageIcon("ImportedImages\\Images\\Background.jpg"));
 	//	enterButton.addKeyListener(this);
 		enterButton.addMouseListener(this);
 		enterButton.addActionListener(this);
@@ -96,7 +96,7 @@ public class LevelWindow extends JPanel implements ActionListener,MouseListener 
 	}
 	
 	public void paint (Graphics g) {
-		background = new ImageIcon("F:\\Images\\Background.jpg");
+		background = new ImageIcon("ImportedImages\\Images\\Background.jpg");
 		g.drawImage(background.getImage(),0,0,null);
 		
 	}
@@ -126,18 +126,17 @@ public class LevelWindow extends JPanel implements ActionListener,MouseListener 
 */
 	@Override
 	public void actionPerformed(ActionEvent ae) {
-		if(ae.getSource()==backButton) {
+		if(ae.getSource()== backButton) {
 			//levels.dispose();
 			MenuR m=new MenuR();
 		}
-		else if(ae.getSource()==enterButton&&nameOfLevels.getSelectedIndex()==0) {
+		else if(ae.getSource()==enterButton && nameOfLevels.getSelectedIndex()==0) {
 			try {
-				FirstLevel fl= new FirstLevel();
+				FirstLevel f1= new FirstLevel();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 		}
 		else if(ae.getSource()==enterButton && nameOfLevels.getSelectedIndex()==1) {
 			SecondLevel sl=new SecondLevel();

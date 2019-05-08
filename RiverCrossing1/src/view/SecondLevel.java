@@ -48,12 +48,12 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 	
 	
 	static JFrame window = new JFrame("Second Story");
-	Farmer1 farmer1= new Farmer1(xfarmer1,yfarmer1,"C:/Users/lenovo/git/repository/RiverCrossing1/ImportedImages/Images/farmer44 trial.png",0);
-	Farmer1 farmer2= new Farmer1(xfarmer2,yfarmer2,"C:/Users/lenovo/git/repository/RiverCrossing1/ImportedImages/Images/farmm.png",0);
-	Farmer1 farmer3= new Farmer1(xfarmer3,yfarmer3,"C:/Users/lenovo/git/repository/RiverCrossing1/ImportedImages/Images/humanw.png",0);
-	Farmer1 farmer4= new Farmer1(xfarmer4,yfarmer4,"C:/Users/lenovo/git/repository/RiverCrossing1/ImportedImages/Images/farmer455.png",0);
-	Boat boat = Boat.getInstance(xboat,yboat,"C:/Users/lenovo/git/repository/RiverCrossing1/ImportedImages/Images/boatt.png",0);
-	Animal animal=new Animal(xanimal,yanimal,"C:/Users/lenovo/git/repository/RiverCrossing1/ImportedImages/Images/mikepp.png",0);
+	Farmer1 farmer1= new Farmer1(xfarmer1,yfarmer1,"ImportedImages\\Images\\farmer44 trial.png",0);
+	Farmer1 farmer2= new Farmer1(xfarmer2,yfarmer2,"ImportedImages\\Images\\farmm.png",0);
+	Farmer1 farmer3= new Farmer1(xfarmer3,yfarmer3,"ImportedImages\\Images\\humanw.png",0);
+	Farmer1 farmer4= new Farmer1(xfarmer4,yfarmer4,"ImportedImages\\Images\\farmer455.png",0);
+	Boat boat = Boat.getInstance(xboat,yboat,"ImportedImages\\Images\\boatt.png",0);
+	Animal animal=new Animal(xanimal,yanimal,"ImportedImages\\Images\\mikepp.png",0);
 	JButton move = new JButton();
 	JButton moveback = new JButton();
 	boolean moveleft =false;
@@ -162,7 +162,7 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 	}	
 	public void paint (Graphics g) {
 	//	super.paint(g);
-		ImageIcon background = new ImageIcon("C:/Users/lenovo/git/repository/RiverCrossing1/ImportedImages/Images/story2.jpg");
+		ImageIcon background = new ImageIcon("ImportedImages\\Images\\story2.jpg");
 		g.drawImage(background.getImage(), 0, 0,null);
 		boat.drawBoat(g);
 		farmer1.drawFarmer(g);
@@ -474,85 +474,7 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 		}
 
 		}
-		//if (onleft==true )
-	//if (onleft==false)
-			//moves++;
-	System.out.println(moves);	
-	//	if (farmer1.getPosition()==1 || farmer2.getPosition()==1 || farmer3.getPosition()==1 || farmer4.getPosition()==1)
-		//	tt.restart();
-	//	else
 		
-		
-	/*	
-		if (animal.getPosition()==1 && farmer1.getPosition()==0 && farmer2.getPosition()==0 &&  farmer3.getPosition()==0 &&  farmer4.getPosition()==0)
-		{
-			tt.stop();
-			
-			
-			
-			//JOptionPane.showMessageDialog(window, "Only Farmers can row the boat");
-		}
-		else if (farmer1.getPosition() ==0&&  farmer2.getPosition()==0 && farmer3.getPosition()==0 && farmer4.getPosition()==0 &&animal.getPosition()==0)
-			tt.stop();
-		else if (farmer1.getPosition() ==2&&  farmer2.getPosition()==2 && farmer3.getPosition()==2 && farmer4.getPosition()==2 &&animal.getPosition()==2)
-			tt.stop();
-		else if (farmer1.getPosition()==1 && farmer2.getPosition()==1 && farmer3.getPosition()==0 && farmer4.getPosition()==0 && animal.getPosition()==0)//60+40
-			tt.restart();
-		else if (farmer4.getPosition()==1 && animal.getPosition()==1 && farmer1.getPosition()==0 && farmer2.getPosition()==0 && farmer3.getPosition()==0)//80+20
-			tt.restart();
-		else if (farmer1.getPosition()==1 && animal.getPosition()==1 && farmer2.getPosition()==0 && farmer3.getPosition()==0 && farmer4.getPosition()==0)//60+20
-			tt.restart();
-			
-		else if (farmer1.getPosition()==1 && farmer3.getPosition()==1 )//60+90
-		{
-			tt.stop();
-			JOptionPane.showMessageDialog(window, "Boat Cannot bear more than 100 kg!");
-		}
-		else if (farmer1.getPosition()==1 && farmer4.getPosition()==1)//60+80
-		{
-			tt.stop();
-			JOptionPane.showMessageDialog(window, "Boat Cannot bear more than 100 kg!");
-		}
-		else if (farmer2.getPosition()==1 && farmer3.getPosition()==1)//40+90
-		{
-			tt.stop();
-			JOptionPane.showMessageDialog(window, "Boat Cannot bear more than 100 kg!");
-		}
-		else if (farmer2.getPosition()==1 && farmer4.getPosition()==1)//40+80
-		{
-			tt.stop();
-			JOptionPane.showMessageDialog(window, "Boat Cannot bear more than 100 kg!");
-		}
-		else if (farmer2.getPosition()==1 && animal.getPosition()==1 && farmer1.getPosition()==0 && farmer3.getPosition()==0 && farmer4.getPosition()==0)//40+20
-		{
-			tt.start();
-		}
-		else if (farmer3.getPosition()==1 && farmer4.getPosition()==1)//90+80
-		{
-			tt.stop();
-			JOptionPane.showMessageDialog(window, "Boat Cannot bear more than 100 kg!");
-		}
-		else if (farmer3.getPosition()==1 && animal.getPosition()==1)//90+20
-		{
-			tt.stop();
-			JOptionPane.showMessageDialog(window, "Boat Cannot bear more than 100 kg!");
-		}
-		
-		else if (farmer3.getPosition()==1)
-			tt.restart();
-		
-		
-		if (farmer1.getPosition()==2 && farmer2.getPosition()==2 && farmer3.getPosition()==2 && farmer4.getPosition() ==2 && animal.getPosition() ==2)
-		{
-		tt.stop();
-		moveright=false;
-		onleft=true;
-		
-		JOptionPane.showMessageDialog(window, "You Won !!!");
-	
-		
-		}
-		*/
 		
 		}
 	
