@@ -48,12 +48,12 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 	
 	
 	static JFrame window = new JFrame("Second Story");
-	Farmer1 farmer1= new Farmer1(xfarmer1,yfarmer1,"F:\\Images\\farmer44 trial.png",0);
-	Farmer1 farmer2= new Farmer1(xfarmer2,yfarmer2,"F:\\Images\\farmm.png",0);
-	Farmer1 farmer3= new Farmer1(xfarmer3,yfarmer3,"F:\\Images\\humanw.png",0);
-	Farmer1 farmer4= new Farmer1(xfarmer4,yfarmer4,"F:\\Images\\farmer455.png",0);
-	Boat boat = Boat.getInstance(xboat,yboat,"F:\\Images\\boatt.png",0);
-	Animal animal=new Animal(xanimal,yanimal,"F:\\Images\\mikepp.png",0);
+	Farmer1 farmer1= new Farmer1(xfarmer1,yfarmer1,"C:/Users/lenovo/git/repository/RiverCrossing1/ImportedImages/Images/farmer44 trial.png",0);
+	Farmer1 farmer2= new Farmer1(xfarmer2,yfarmer2,"C:/Users/lenovo/git/repository/RiverCrossing1/ImportedImages/Images/farmm.png",0);
+	Farmer1 farmer3= new Farmer1(xfarmer3,yfarmer3,"C:/Users/lenovo/git/repository/RiverCrossing1/ImportedImages/Images/humanw.png",0);
+	Farmer1 farmer4= new Farmer1(xfarmer4,yfarmer4,"C:/Users/lenovo/git/repository/RiverCrossing1/ImportedImages/Images/farmer455.png",0);
+	Boat boat = Boat.getInstance(xboat,yboat,"C:/Users/lenovo/git/repository/RiverCrossing1/ImportedImages/Images/boatt.png",0);
+	Animal animal=new Animal(xanimal,yanimal,"C:/Users/lenovo/git/repository/RiverCrossing1/ImportedImages/Images/mikepp.png",0);
 	JButton move = new JButton();
 	JButton moveback = new JButton();
 	boolean moveleft =false;
@@ -69,7 +69,6 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 
 	SecondLevel(){
 		tt.start();
-	//	tt.stop();
 		this.setLayout(null);
 		window.add(this);
 		window.setSize(1320,950);
@@ -163,7 +162,7 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 	}	
 	public void paint (Graphics g) {
 	//	super.paint(g);
-		ImageIcon background = new ImageIcon("F:\\Images\\story2.jpg");
+		ImageIcon background = new ImageIcon("C:/Users/lenovo/git/repository/RiverCrossing1/ImportedImages/Images/story2.jpg");
 		g.drawImage(background.getImage(), 0, 0,null);
 		boat.drawBoat(g);
 		farmer1.drawFarmer(g);

@@ -33,7 +33,8 @@ import river.GameEngine.Location;
 
 public class FirstLevel extends JPanel implements ActionListener, MouseListener, MouseMotionListener {
 
-	GameEngine engine;
+	
+	
 
 	public static void main(String args[]) throws IOException {
 		FirstLevel kk = new FirstLevel();
@@ -61,12 +62,12 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 	
 
 	Timer t = new Timer(100, this);
-	Farmer1 farmer = new Farmer1(xfarmer, yfarmer, "F:\\Images\\farm2.png", 0);
+	Farmer1 farmer = new Farmer1(xfarmer, yfarmer, "C:/Users/lenovo/git/repository/RiverCrossing1/ImportedImages/Images/farm2.png", 0);
 	Factory f = new Factory();
 	
-	Animal wolf = new Animal(xwolf, ywolf, "F:\\Images\\wolfff.png", 0);
-	Animal goat = new Animal(xgoat, ygoat, "F:\\Images\\gggg.png", 0);
-	Boat boat =  Boat.getInstance(xboat, yboat, "F:\\Images\\boat2.png", 0); //
+	Animal wolf = new Animal(xwolf, ywolf, "C:/Users/lenovo/git/repository/RiverCrossing1/ImportedImages/Images/wolfff.png", 0);
+	Animal goat = new Animal(xgoat, ygoat, "C:/Users/lenovo/git/repository/RiverCrossing1/ImportedImages/Images/gggg.png", 0);
+	Boat boat =  Boat.getInstance(xboat, yboat, "C:/Users/lenovo/git/repository/RiverCrossing1/ImportedImages/Images/boat2.png", 0); //
 	
 	Plant plant = (Plant)f.getShape("Plant");
 	
@@ -86,7 +87,7 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 	FirstLevel() throws IOException {
 		plant.setxAxis(xplant);
 		plant.setyAxis(yplant);
-		plant.setImagePath("F:\\Images\\plantt.png");
+		plant.setImagePath("C:/Users/lenovo/git/repository/RiverCrossing1/ImportedImages/Images/plantt.png");
 		plant.setPosition(0);
 		t.start();
 		window.add(this);
@@ -163,7 +164,7 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 	}
 
 	public void paint(Graphics g) {
-		ImageIcon background = new ImageIcon("F:\\Images\\story1.jpeg");
+		ImageIcon background = new ImageIcon("C:/Users/lenovo/git/repository/RiverCrossing1/ImportedImages/Images/story1.jpeg");
 		g.drawImage(background.getImage(), 0, 0, null);
 		
 		
@@ -269,7 +270,7 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 					}
 					if (plant.getPosition() == 1) {
 						plant.setPosition(2);
-						xplant -= 200;
+						xplant -= 250;
 						yplant -= 80;
 						plant.setyAxis(yplant);
 						plant.setxAxis(xplant);
@@ -330,7 +331,7 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 					if (farmer.getPosition() == 1) {
 						
 						farmer.setPosition(0);
-						xfarmer -= 45;
+						xfarmer -= 120;
 						yfarmer-=120;
 						farmer.setyAxis(yfarmer);
 						farmer.setxAxis(xfarmer);
@@ -400,7 +401,7 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 				
 				
 				if (farmer.getPosition()!=1) {
-				xfarmer += 40;
+				xfarmer +=120;
 				yfarmer += 118;
 				farmer.setPosition(1);
 				farmer.setyAxis(yfarmer);
