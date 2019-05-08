@@ -34,8 +34,6 @@ import river.GameEngine.Location;
 public class FirstLevel extends JPanel implements ActionListener, MouseListener, MouseMotionListener {
 
 	
-	
-
 	public static void main(String args[]) throws IOException {
 		FirstLevel kk = new FirstLevel();
 
@@ -59,8 +57,6 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 	int yplant = 390;
 	int moves=0;
 	
-	
-
 	Timer t = new Timer(100, this);
 	Farmer1 farmer = new Farmer1(xfarmer, yfarmer, "ImportedImages\\Images\\farm2.png", 0);
 	Factory f = new Factory();
@@ -74,10 +70,7 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 	Moveleft m = new Moveleft(boat);
 	Moveright r= new Moveright(boat);
 	JLabel numberofmoves = new JLabel();
-	
-	
-	
-
+		
 	JButton instructionsButton = new JButton();
 	JButton solutionButton = new JButton();
 	JLabel fa = new JLabel();
@@ -99,7 +92,6 @@ public class FirstLevel extends JPanel implements ActionListener, MouseListener,
 //instructions button		
 		instructionsButton.setText("Instructions ");
 		instructionsButton.setBackground(Color.WHITE);
-		
 		instructionsButton.addActionListener(this);
 		instructionsButton.addMouseListener(this);
 		instructionsButton.setSize(0, 0);

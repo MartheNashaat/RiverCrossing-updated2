@@ -76,12 +76,9 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setVisible(true);
 		
-		
-		
 //instructions button
 		instructionsButton.setText("Instructions ");
 		instructionsButton.setBackground(Color.WHITE);
-		// instructionsButton.setIcon (new ImageIcon("images//instr..jpg"));
 		instructionsButton.addActionListener(this);
 		instructionsButton.addMouseListener(this);
 		instructionsButton.setSize(0, 0);
@@ -92,7 +89,6 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 //solutions button
 		solutionButton.setText("Solution ");
 		solutionButton.setBackground(Color.WHITE);
-		// instructionsButton.setIcon (new ImageIcon("images//instr..jpg"));
 		solutionButton.addActionListener(this);
 		solutionButton.addMouseListener(this);
 		solutionButton.setSize(0, 0);
@@ -129,8 +125,7 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 				numberofmoves.setText("Moves : " + moves);
 				
 				
-				// TODO Auto-generated method stub
-
+			
 			}
 		});
 
@@ -145,13 +140,13 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 				
 				//repaint();
 
-				// TODO Auto-generated method stub
+			
 
 			}
 		});
 
 		
-		//numberofmoves.setText("Moves : " + moves);
+	
 		
 		
 		numberofmoves.setBounds(1135, 400, 100,30);
@@ -571,26 +566,15 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 				repaint();
 			}
 
-		 }
+		  }
 		}
-
-		
 		
 	}
 
 		
-	
-	
-	
-	
-	
-	
-	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		
-		
-		// TODO Auto-generated method stub
 		
 	}
 	@Override
@@ -614,17 +598,17 @@ public class SecondLevel extends JPanel implements ActionListener, MouseListener
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
+	
 		
 	}
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
+
 		
 	}
 	public static void main (String[] args) {

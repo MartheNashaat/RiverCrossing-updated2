@@ -59,14 +59,12 @@ public class LevelWindow extends JPanel implements ActionListener,MouseListener 
 		backButton.setText("Back");
 		backButton.setForeground(Color.BLACK);
 		backButton.setBackground(Color.gray);
-//		backButton.addKeyListener(this);
 		backButton.addMouseListener(this);
 		backButton.addActionListener(this);
 		levels.getContentPane().add(backButton);
 		
 		enterButton.setBounds(0, 0, 732, 382);
 		enterButton.setIcon(new ImageIcon("ImportedImages\\Images\\Background.jpg"));
-	//	enterButton.addKeyListener(this);
 		enterButton.addMouseListener(this);
 		enterButton.addActionListener(this);
 		levels.getContentPane().add(enterButton);
@@ -82,17 +80,7 @@ public class LevelWindow extends JPanel implements ActionListener,MouseListener 
 		levels.setSize(750,550);
 		levels.setLocation(50,50);
 		levels.setVisible(true);
-		
-	/*	level1button = new JButton("Level 1");
-		level1button.setFont(new Font("Segoe Print", Font.PLAIN, 15));
-		level1button.setBounds(24, 181, 122, 35);
-		levels.getContentPane().add(level1button);
-		
-		level2button = new JButton("Level 2");
-		level2button.setFont(new Font("Segoe Print", Font.PLAIN, 15));
-		level2button.setBounds(263, 181, 122, 35);
-		levels.getContentPane().add(level2button);
-		*/
+	
 	}
 	
 	public void paint (Graphics g) {
@@ -102,29 +90,7 @@ public class LevelWindow extends JPanel implements ActionListener,MouseListener 
 	}
 	
 	
-	/*@Override
-	public void keyPressed(KeyEvent kp) {
-		if(kp.getKeyCode()==KeyEvent.VK_ESCAPE)
-		{
-			window.dispose();
-			MenuR m= new MenuR();
-		}
-	
-	}
-
-	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-*/
-	@Override
+		@Override
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getSource()== backButton) {
 			//levels.dispose();
@@ -147,32 +113,28 @@ public class LevelWindow extends JPanel implements ActionListener,MouseListener 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		
-		// TODO Auto-generated method stub
 		
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 	
 	public static void main (String args []) {
-		//LoginScreen ss = new LoginScreen();
 		LevelWindow le = new LevelWindow();
 	}
 }
